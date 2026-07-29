@@ -1,6 +1,4 @@
-// Remplacez ces deux valeurs par celles de votre projet Supabase.
-// Project Settings > API
 window.AMF_CONFIG = {
-  supabaseUrl: "https://VOTRE-PROJET.supabase.co",
-  supabasePublishableKey: "VOTRE_CLE_PUBLISHABLE"
+  supabaseUrl: "https://isnayghuxwhkcwedxydd.supabase.co",
+  supabasePublishableKey: "sb_publishable_FKGVSGw7iMwYKKWRF4KkPA_9eViIi8V"
 };
