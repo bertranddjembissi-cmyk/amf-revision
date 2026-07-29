@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>AMF Révision</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header>
+  <div class="wrap top">
+    <div class="brand">AMF <span>Révision</span></div>
+    <div id="userArea"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="authView" class="card">
+    <h1>Connexion étudiant</h1>
+    <p class="muted">Créez un compte ou connectez-vous pour conserver votre progression.</p>
+    <label>E-mail</label><input id="email" type="email" autocomplete="email">
+    <label>Mot de passe</label><input id="password" type="password" autocomplete="current-password">
+    <div class="toolbar">
+      <button class="primary" onclick="signIn()">Se connecter</button>
+      <button class="secondary" onclick="signUp()">Créer un compte</button>
+    </div>
+    <p id="authMsg" class="muted"></p>
+  </section>
+
+  <section id="appView" class="hidden">
+    <div class="card">
+      <h1>Tableau de bord</h1>
+      <div class="stats">
+        <div class="stat"><b id="qCount">—</b><span>questions disponibles</span></div>
+        <div class="stat"><b id="doneCount">—</b><span>réponses</span></div>
+        <div class="stat"><b id="rate">—</b><span>réussite</span></div>
+        <div class="stat"><b id="errorCount">—</b><span>erreurs à revoir</span></div>
+      </div>
+    </div>
+
+    <div id="homeActions" class="grid">
+      <div class="card"><h3>📝 Entraînement</h3><p class="muted">10 questions aléatoires.</p><button class="primary full" onclick="startQuiz(10)">Commencer</button></div>
+      <div class="card"><h3>🎓 Examen blanc</h3><p class="muted">30 questions aléatoires.</p><button class="gold full" onclick="startQuiz(30)">Lancer</button></div>
+      <div class="card"><h3>🔴 Mes erreurs</h3><p class="muted">Réviser les questions déjà ratées.</p><button class="secondary full" onclick="startErrorQuiz()">Réviser</button></div>
+      <div class="card" id="adminCard"><h3>⚙️ Administration</h3><p class="muted">Ajouter des QCM à la banque centrale.</p><button class="secondary full" onclick="showAdmin()">Ouvrir</button></div>
+    </div>
+
+    <section id="quizView" class="card hidden">
+      <div class="toolbar between"><span id="progress"></span><span id="theme" class="pill"></span></div>
+      <h2 id="questionText"></h2>
+      <div id="answers"></div>
+      <div id="feedback"></div>
+      <div class="toolbar"><button class="secondary" onclick="goHome()">Quitter</button><button id="nextBtn" class="primary hidden" onclick="nextQuestion()">Suivant →</button></div>
+    </section>
+
+    <section id="resultView" class="card hidden">
+      <h2>Résultat</h2><h1 id="finalScore"></h1><p id="finalText"></p>
+      <button class="primary" onclick="goHome()">Retour au tableau de bord</button>
+    </section>
+
+    <section id="adminView" class="card hidden">
+      <div class="toolbar between"><h2>Ajouter une question</h2><button class="secondary" onclick="goHome()">Fermer</button></div>
+      <label>Thème</label><input id="newTheme">
+      <label>Question</label><textarea id="newQuestion" rows="3"></textarea>
+      <label>Réponse A</label><input id="newA">
+      <label>Réponse B</label><input id="newB">
+      <label>Réponse C</label><input id="newC">
+      <label>Bonne réponse</label>
+      <select id="newCorrect"><option value="0">A</option><option value="1">B</option><option value="2">C</option></select>
+      <label>Explication</label><textarea id="newExplanation" rows="3"></textarea>
+      <button class="primary" onclick="addQuestion()">Ajouter à la banque centrale</button>
+      <p id="adminMsg" class="muted"></p>
+    </section>
+  </section>
+</main>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body></html>
